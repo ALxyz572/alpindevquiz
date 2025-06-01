@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+Website Alpin Developer
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Custom scrollbar for leaderboard */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4338ca;
+  }
+  </style>
+ </head>
+ <body class="bg-gradient-to-b from-indigo-50 to-indigo-100 min-h-screen flex flex-col">
+  <!-- LOADING SCREEN -->
+  <div class="fixed inset-0 bg-indigo-900 flex flex-col items-center justify-center text-white z-50" id="loadingScreen">
+   <img alt="Avatar ilustrasi pembuat website, pria muda dengan kacamata dan senyum ramah, latar belakang biru gelap" class="w-36 h-36 rounded-full mb-6 animate-spin-slow" height="150" src="https://files.catbox.moe/9c0yrz.jpg" width="150"/>
+   <h1 class="text-3xl font-bold mb-4">
+    Alpin Developer();
+   </h1>
+   <p class="max-w-md text-center mb-8 px-4">
+    Website kuis ini dibuat untuk mengasah pengetahuan dan menambah wawasan
+    kamu dalam berbagai bidang. Nikmati pengalaman belajar yang menyenangkan!
+   </p>
+   <div class="w-24 h-24 border-8 border-indigo-700 border-t-transparent rounded-full animate-spin">
+   </div>
+  </div>
+  <!-- MAIN APP -->
+  <div class="flex-grow flex flex-col max-w-5xl mx-auto w-full px-4 py-6 hidden" id="app">
+   <!-- HEADER -->
+   <header class="flex flex-col sm:flex-row items-center justify-between mb-6">
+    <h1 class="text-4xl font-extrabold text-indigo-700 select-none flex items-center gap-3">
+     <i class="fas fa-brain text-indigo-600">
+     </i>
+     Kuis Seru
+    </h1>
+    <nav class="flex flex-wrap gap-3 mt-4 sm:mt-0">
+     <button class="nav-btn bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition" data-page="home">
+      Beranda
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="sejarah">
+      Quiz Sejarah
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="islami">
+      Quiz Islami
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="kristen">
+      Quiz Kristen
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="matematika">
+      Quiz Matematika
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="programmer">
+      Quiz Programmer
+     </button>
+     <button class="nav-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition" data-page="leaderboard">
+      Leaderboard
+     </button>
+    </nav>
+   </header>
+   <!-- PAGES CONTAINER -->
+   <main class="flex-grow bg-white rounded-lg shadow-lg p-6 overflow-auto max-h-[calc(100vh-140px)]">
+    <!-- HOME PAGE -->
+    <section class="page-section" id="page-home">
+     <div class="flex flex-col items-center text-center max-w-xl mx-auto">
+      <img alt="Avatar pembuat website, pria muda dengan kacamata dan senyum ramah, latar belakang biru muda" class="w-48 h-48 rounded-full mb-6 shadow-lg" height="200" src="https://files.catbox.moe/9c0yrz.jpg" width="200"/>
+      <h2 class="text-3xl font-bold mb-4 text-indigo-700">
+       Tentang Pembuat
+      </h2>
+      <p class="mb-6 text-gray-700">
+       Halo! Saya adalah pengembang website ini, seorang penggemar kuis dan
+          pembelajar seumur hidup. Website ini dibuat untuk memberikan pengalaman
+          belajar yang menyenangkan dan menantang dalam berbagai topik menarik.
+      </p>
+      <h3 class="text-2xl font-semibold mb-3 text-indigo-600">
+       Alasan Dibuat
+      </h3>
+      <p class="text-gray-700">
+       Saya percaya belajar tidak harus membosankan. Dengan kuis interaktif ini,
+          kamu bisa mengasah pengetahuan sambil bersenang-senang. Semoga website ini
+          bisa membantu kamu dan banyak orang lainnya.
+      </p>
+     </div>
+    </section>
+    <!-- QUIZ TEMPLATE -->
+    <section class="page-section hidden flex flex-col max-w-3xl mx-auto" id="page-quiz">
+     <div class="flex items-center gap-4 mb-4">
+      <img alt="Avatar ilustrasi tema quiz" class="w-20 h-20 rounded-full border-4 border-indigo-600" height="80" id="quizAvatar" src="https://files.catbox.moe/9c0yrz.jpg" width="80"/>
+      <div>
+       <h2 class="text-3xl font-bold text-indigo-700 select-none" id="quizTitle">
+        Quiz Title
+       </h2>
+       <p class="text-indigo-600 italic max-w-md" id="quizDescription">
+        Deskripsi singkat quiz.
+       </p>
+      </div>
+     </div>
+     <div class="mb-4 px-4 py-2 bg-indigo-100 rounded-md text-indigo-700 italic font-semibold select-text" id="quoteContainer">
+      "Belajar adalah kunci kesuksesan."
+     </div>
+     <div class="flex flex-col gap-6 bg-indigo-50 rounded-md p-6 shadow-inner" id="quizContent">
+      <div class="text-gray-800 text-lg font-medium min-h-[120px]" id="questionContainer">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="answersContainer">
+      </div>
+     </div>
+     <div class="flex justify-between items-center mt-6">
+      <button class="bg-indigo-300 text-indigo-900 px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="prevBtn">
+       <i class="fas fa-arrow-left mr-2">
+       </i>
+       Sebelumnya
+      </button>
+      <button class="bg-indigo-600 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="nextBtn">
+       Berikutnya
+       <i class="fas fa-arrow-right ml-2">
+       </i>
+      </button>
+     </div>
+     <div class="mt-6 flex justify-center">
+      <button class="bg-indigo-700 text-white px-6 py-3 rounded-full text-xl font-semibold hover:bg-indigo-800 transition" id="startQuizBtn">
+       Start Quiz
+      </button>
+     </div>
+    </section>
+    <!-- LEADERBOARD PAGE -->
+    <section class="page-section hidden max-w-3xl mx-auto" id="page-leaderboard">
+     <h2 class="text-3xl font-bold text-indigo-700 mb-6 text-center">
+      Leaderboard Kuis Seru
+     </h2>
+     <div class="overflow-auto max-h-[600px] border border-indigo-300 rounded-md shadow-inner">
+      <table class="w-full text-left border-collapse">
+       <thead class="bg-indigo-100 sticky top-0">
+        <tr>
+         <th class="py-3 px-4 border-b border-indigo-300">
+          Posisi
+         </th>
+         <th class="py-3 px-4 border-b border-indigo-300">
+          Nama
+         </th>
+         <th class="py-3 px-4 border-b border-indigo-300">
+          Quiz
+         </th>
+         <th class="py-3 px-4 border-b border-indigo-300">
+          Nilai
+         </th>
+         <th class="py-3 px-4 border-b border-indigo-300">
+          Tanggal
+         </th>
+        </tr>
+       </thead>
+       <tbody class="text-indigo-900" id="leaderboardBody">
+       </tbody>
+      </table>
+     </div>
+     <div class="mt-6 text-center text-gray-600 italic">
+      Nilai tertinggi dari semua quiz akan muncul di sini.
+     </div>
+    </section>
+   </main>
+  </div>
+  <!-- AUDIO -->
+  <audio id="backgroundAudio" loop="" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_3a7a3a7a3a.mp3?filename=happy-upbeat-ambient-11607.mp3">
+  </audio>
+  <script>
+   // Data for quizzes: 30 questions each, with 4 options and correct answer index
+  // For brevity, questions are simple and illustrative.
+  const quizzes = {
+    sejarah: {
+      title: "Quiz Sejarah",
+      description: "Uji pengetahuanmu tentang sejarah dunia dan Indonesia.",
+      avatar:
+        "https://placehold.co/80x80/png?text=Sejarah+Avatar",
+      quote:
+        '"Sejarah adalah guru kehidupan." – Cicero',
+      questions: [
+        {
+          question: "Siapa proklamator kemerdekaan Indonesia?",
+          answers: ["Soekarno dan Hatta", "Sukarno dan Sjahrir", "Hatta dan Sjahrir", "Sukarno dan Kartosoewirjo"],
+          correct: 0,
+        },
+        {
+          question: "Kapan Perang Dunia II berakhir?",
+          answers: ["1943", "1944", "1945", "1946"],
+          correct: 2,
+        },
+        {
+          question: "Siapa penemu benua Amerika?",
+          answers: ["Christopher Columbus", "Vasco da Gama", "Ferdinand Magellan", "Marco Polo"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kerajaan Hindu terbesar di Indonesia?",
+          answers: ["Majapahit", "Sriwijaya", "Mataram", "Singasari"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis Proklamasi Kemerdekaan?",
+          answers: ["Soekarno", "Mohammad Hatta", "Sayuti Melik", "Sutan Sjahrir"],
+          correct: 2,
+        },
+        {
+          question: "Kapan Indonesia merdeka?",
+          answers: ["17 Agustus 1945", "17 Agustus 1946", "1 Juni 1945", "1 Januari 1945"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perjanjian yang mengakhiri Perang Dunia I?",
+          answers: ["Perjanjian Versailles", "Perjanjian Paris", "Perjanjian London", "Perjanjian Berlin"],
+          correct: 0,
+        },
+        {
+          question: "Siapa tokoh utama dalam Revolusi Prancis?",
+          answers: ["Napoleon Bonaparte", "Louis XVI", "Maximilien Robespierre", "Jean-Jacques Rousseau"],
+          correct: 2,
+        },
+        {
+          question: "Apa nama kapal yang digunakan Columbus untuk pelayaran ke Amerika?",
+          answers: ["Santa Maria", "Mayflower", "Endeavour", "Beagle"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin pasukan kemerdekaan Indonesia di Aceh?",
+          answers: ["Teuku Umar", "Cut Nyak Dhien", "Sisingamangaraja", "Diponegoro"],
+          correct: 0,
+        },
+        {
+          question: "Kapan berdirinya Kerajaan Majapahit?",
+          answers: ["1293", "1350", "1400", "1500"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang dikenal sebagai Bapak Pendidikan Indonesia?",
+          answers: ["Ki Hajar Dewantara", "R.A Kartini", "Mohammad Hatta", "Soekarno"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perang saudara di Amerika Serikat?",
+          answers: ["Perang Saudara", "Perang Dunia I", "Perang Revolusi", "Perang Kemerdekaan"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menemukan mesin uap?",
+          answers: ["James Watt", "Thomas Edison", "Nikola Tesla", "Alexander Graham Bell"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama peristiwa pembantaian di Paris tahun 1572?",
+          answers: ["Pembantaian Saint Bartholomew", "Pembantaian Versailles", "Pembantaian Berlin", "Pembantaian London"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin pasukan Inggris dalam Perang 100 Tahun?",
+          answers: ["Joan of Arc", "Henry V", "Richard III", "Edward III"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama revolusi yang terjadi di Rusia tahun 1917?",
+          answers: ["Revolusi Bolshevik", "Revolusi Prancis", "Revolusi Amerika", "Revolusi Industri"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis Magna Carta?",
+          answers: ["Raja John", "Raja Henry", "Raja Richard", "Raja Edward"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perang antara Sparta dan Athena?",
+          answers: ["Perang Peloponnesian", "Perang Dunia I", "Perang Dunia II", "Perang Salib"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menemukan benua Australia?",
+          answers: ["James Cook", "Christopher Columbus", "Ferdinand Magellan", "Vasco da Gama"],
+          correct: 0,
+        },
+        {
+          question: "Kapan berdirinya Kerajaan Sriwijaya?",
+          answers: ["7 abad Masehi", "10 abad Masehi", "5 abad Masehi", "12 abad Masehi"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin pasukan Indonesia dalam Pertempuran Surabaya?",
+          answers: ["Sudirman", "Soekarno", "Hatta", "Bung Tomo"],
+          correct: 3,
+        },
+        {
+          question: "Apa nama perjanjian yang membagi dunia antara Spanyol dan Portugal?",
+          answers: ["Perjanjian Tordesillas", "Perjanjian Versailles", "Perjanjian Paris", "Perjanjian London"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang dikenal sebagai Bapak Proklamator Indonesia?",
+          answers: ["Soekarno", "Mohammad Hatta", "Sutan Sjahrir", "Tan Malaka"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perang yang terjadi antara Inggris dan Prancis di Amerika Utara?",
+          answers: ["Perang Prancis dan India", "Perang Dunia I", "Perang Dunia II", "Perang Saudara"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin pasukan Jepang dalam Perang Dunia II?",
+          answers: ["Hideki Tojo", "Hirohito", "Isoroku Yamamoto", "Tomoyuki Yamashita"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama revolusi yang mengakhiri monarki di Inggris?",
+          answers: ["Revolusi Inggris", "Revolusi Prancis", "Revolusi Amerika", "Revolusi Industri"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis buku 'Mein Kampf'?",
+          answers: ["Adolf Hitler", "Joseph Stalin", "Benito Mussolini", "Winston Churchill"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perang yang terjadi antara Korea Utara dan Korea Selatan?",
+          answers: ["Perang Korea", "Perang Vietnam", "Perang Dunia II", "Perang Teluk"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin pasukan Mongol?",
+          answers: ["Genghis Khan", "Kublai Khan", "Tamerlane", "Attila"],
+          correct: 0,
+        },
+      ],
+    },
+    islami: {
+      title: "Quiz Islami",
+      description: "Uji pengetahuanmu tentang agama Islam dan sejarahnya.",
+      avatar:
+        "https://placehold.co/80x80/png?text=Islami+Avatar",
+      quote:
+        '"Ilmu tanpa amal adalah kesia-siaan." – Hadis',
+      questions: [
+        {
+          question: "Siapa nabi terakhir dalam Islam?",
+          answers: ["Nabi Muhammad SAW", "Nabi Isa AS", "Nabi Musa AS", "Nabi Ibrahim AS"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kitab suci umat Islam?",
+          answers: ["Al-Qur'an", "Alkitab", "Weda", "Tripitaka"],
+          correct: 0,
+        },
+        {
+          question: "Berapa jumlah rakaat shalat wajib sehari semalam?",
+          answers: ["5", "10", "17", "20"],
+          correct: 2,
+        },
+        {
+          question: "Apa nama bulan puasa dalam Islam?",
+          answers: ["Ramadan", "Syawal", "Dzulhijjah", "Muharram"],
+          correct: 0,
+        },
+        {
+          question: "Siapa istri pertama Nabi Muhammad SAW?",
+          answers: ["Khadijah", "Aisyah", "Hafsa", "Zainab"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Islam'?",
+          answers: ["Penyerahan diri kepada Allah", "Perdamaian", "Kebaikan", "Keimanan"],
+          correct: 0,
+        },
+        {
+          question: "Apa rukun Islam yang pertama?",
+          answers: ["Syahadat", "Shalat", "Puasa", "Zakat"],
+          correct: 0,
+        },
+        {
+          question: "Dimanakah Ka'bah berada?",
+          answers: ["Mekkah", "Madinah", "Yerusalem", "Baghdad"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama shalat sunnah yang dikerjakan sebelum Subuh?",
+          answers: ["Shalat Sunnah Fajar", "Shalat Tahajud", "Shalat Dhuha", "Shalat Witir"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menerima wahyu pertama kali dalam Islam?",
+          answers: ["Nabi Muhammad SAW", "Nabi Isa AS", "Nabi Musa AS", "Nabi Ibrahim AS"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perang besar yang terjadi pada masa Nabi Muhammad SAW?",
+          answers: ["Perang Badar", "Perang Uhud", "Perang Khandak", "Semua benar"],
+          correct: 3,
+        },
+        {
+          question: "Apa arti kata 'Qur'an'?",
+          answers: ["Bacaan", "Kitab", "Petunjuk", "Hukum"],
+          correct: 0,
+        },
+        {
+          question: "Berapa jumlah juz dalam Al-Qur'an?",
+          answers: ["30", "20", "10", "40"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama bulan haji dalam kalender Islam?",
+          answers: ["Dzulhijjah", "Ramadan", "Muharram", "Safar"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Hadis'?",
+          answers: ["Kata-kata dan perbuatan Nabi Muhammad SAW", "Kitab suci", "Doa", "Hukum"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama shalat malam yang sangat dianjurkan?",
+          answers: ["Shalat Tahajud", "Shalat Dhuha", "Shalat Witir", "Shalat Tarawih"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Zakat'?",
+          answers: ["Memberi sebagian harta untuk yang berhak", "Puasa", "Shalat", "Haji"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin kaum Muslimin setelah Nabi Muhammad SAW wafat?",
+          answers: ["Abu Bakar", "Umar", "Utsman", "Ali"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kota yang menjadi tempat hijrah Nabi Muhammad SAW?",
+          answers: ["Madinah", "Mekkah", "Yerusalem", "Baghdad"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Syahadat'?",
+          answers: ["Pengakuan keimanan kepada Allah dan Nabi Muhammad SAW", "Shalat", "Puasa", "Zakat"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kitab yang berisi kumpulan hadis?",
+          answers: ["Sahih Bukhari", "Al-Qur'an", "Tafsir", "Fiqh"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Sunnah'?",
+          answers: ["Perbuatan dan ajaran Nabi Muhammad SAW", "Kitab suci", "Doa", "Hukum"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama doa yang dibaca saat berbuka puasa?",
+          answers: ["Doa berbuka", "Doa sahur", "Doa shalat", "Doa haji"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Haji'?",
+          answers: ["Ibadah ke Mekkah", "Puasa", "Shalat", "Zakat"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama malaikat yang menyampaikan wahyu kepada Nabi Muhammad SAW?",
+          answers: ["Jibril", "Mikail", "Israfil", "Izrail"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Iman'?",
+          answers: ["Kepercayaan kepada Allah dan rasul-Nya", "Puasa", "Shalat", "Zakat"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama bulan pertama dalam kalender Islam?",
+          answers: ["Muharram", "Ramadan", "Syawal", "Dzulhijjah"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Fiqh'?",
+          answers: ["Ilmu tentang hukum Islam", "Doa", "Kitab suci", "Hadis"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama doa yang dibaca saat sahur?",
+          answers: ["Doa sahur", "Doa berbuka", "Doa shalat", "Doa haji"],
+          correct: 0,
+        },
+      ],
+    },
+    kristen: {
+      title: "Quiz Kristen",
+      description: "Uji pengetahuanmu tentang agama Kristen dan Alkitab.",
+      avatar:
+        "https://placehold.co/80x80/png?text=Kristen+Avatar",
+      quote:
+        '"Kasih adalah hukum yang terutama." – Alkitab',
+      questions: [
+        {
+          question: "Siapa tokoh utama dalam agama Kristen?",
+          answers: ["Yesus Kristus", "Musa", "Abraham", "Daud"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kitab suci umat Kristen?",
+          answers: ["Alkitab", "Al-Qur'an", "Weda", "Tripitaka"],
+          correct: 0,
+        },
+        {
+          question: "Berapa jumlah kitab dalam Perjanjian Baru?",
+          answers: ["27", "39", "66", "50"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama hari kebangkitan Yesus Kristus?",
+          answers: ["Paskah", "Natal", "Pentakosta", "Kamis Putih"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang membaptis Yesus Kristus?",
+          answers: ["Yohanes Pembaptis", "Petrus", "Paulus", "Yudas"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Kristen'?",
+          answers: ["Pengikut Kristus", "Pengikut Musa", "Pengikut Abraham", "Pengikut Daud"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama doa yang diajarkan Yesus kepada murid-murid-Nya?",
+          answers: ["Bapa Kami", "Salam Maria", "Doa Syafaat", "Doa Syukur"],
+          correct: 0,
+        },
+        {
+          question: "Dimanakah Yesus dilahirkan?",
+          answers: ["Betlehem", "Nazaret", "Yerusalem", "Kapernaum"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perjamuan terakhir yang dilakukan Yesus?",
+          answers: ["Perjamuan Kudus", "Perjamuan Malam", "Perjamuan Paskah", "Perjamuan Doa"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis sebagian besar surat dalam Perjanjian Baru?",
+          answers: ["Paulus", "Petrus", "Yohanes", "Yakobus"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama gunung tempat Yesus disalibkan?",
+          answers: ["Golgota", "Zaitun", "Hermon", "Tabor"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Injil'?",
+          answers: ["Kabar Baik", "Kitab Suci", "Doa", "Hukum"],
+          correct: 0,
+        },
+        {
+          question: "Berapa jumlah sakramen utama dalam Kristen Katolik?",
+          answers: ["7", "5", "3", "10"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama rasul yang menyangkal Yesus tiga kali?",
+          answers: ["Petrus", "Yohanes", "Paulus", "Yudas"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kota tempat Yesus dibaptis?",
+          answers: ["Yordan", "Betlehem", "Yerusalem", "Nazaret"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang mengkhianati Yesus?",
+          answers: ["Yudas Iskariot", "Petrus", "Yohanes", "Paulus"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama hari peringatan wafat Yesus?",
+          answers: ["Jumat Agung", "Paskah", "Natal", "Pentakosta"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Pentakosta'?",
+          answers: ["Turunnya Roh Kudus", "Kelahiran Yesus", "Kebangkitan Yesus", "Perjamuan Kudus"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis Kitab Wahyu?",
+          answers: ["Yohanes", "Paulus", "Petrus", "Yakobus"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama doa yang sering digunakan dalam ibadah Kristen?",
+          answers: ["Doa Bapa Kami", "Doa Salam Maria", "Doa Syafaat", "Doa Syukur"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perayaan kelahiran Yesus Kristus?",
+          answers: ["Natal", "Paskah", "Pentakosta", "Kamis Putih"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang memimpin gereja pertama setelah Yesus naik ke surga?",
+          answers: ["Petrus", "Paulus", "Yohanes", "Yakobus"],
+          correct: 0,
+        },
+        {
+          question: "Apa arti kata 'Gereja'?",
+          answers: ["Persekutuan orang percaya", "Tempat ibadah", "Kitab suci", "Doa"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama nabi yang membaptis Yesus?",
+          answers: ["Yohanes Pembaptis", "Elia", "Eliseus", "Yesaya"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama kitab yang berisi Mazmur?",
+          answers: ["Mazmur", "Amsal", "Kidung Agung", "Yesaya"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis Kitab Amsal?",
+          answers: ["Salomo", "Daud", "Yesaya", "Yeremia"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama doa yang diajarkan Yesus untuk mengampuni musuh?",
+          answers: ["Doa Pengampunan", "Doa Syafaat", "Doa Syukur", "Doa Bapa Kami"],
+          correct: 0,
+        },
+        {
+          question: "Apa nama perayaan kebangkitan Yesus?",
+          answers: ["Paskah", "Natal", "Pentakosta", "Kamis Putih"],
+          correct: 0,
+        },
+        {
+          question: "Siapa yang menulis sebagian besar Mazmur?",
+          answers: ["Daud", "Salomo", "Yesaya", "Yeremia"],
+          correct: 0,
+        },
+      ],
+    },
+    matematika: {
+      title: "Quiz Matematika",
+      description: "Uji kemampuan matematika dasar dan menengahmu.",
+      avatar:
+        "https://placehold.co/80x80/png?text=Matematika+Avatar",
+      quote:
+        '"Matematika adalah bahasa alam semesta." – Galileo Galilei',
+      questions: [
+        {
+          question: "Berapakah hasil dari 7 x 8?",
+          answers: ["54", "56", "58", "60"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah akar kuadrat dari 81?",
+          answers: ["7", "8", "9", "10"],
+          correct: 2,
+        },
+        {
+          question: "Berapakah hasil dari 15 + 27?",
+          answers: ["42", "41", "43", "44"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 100 ÷ 4?",
+          answers: ["20", "25", "30", "24"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah nilai π (pi) hingga 2 desimal?",
+          answers: ["3.12", "3.14", "3.16", "3.18"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 2 pangkat 5?",
+          answers: ["32", "16", "64", "25"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 45 - 19?",
+          answers: ["26", "25", "27", "28"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 9 x 9?",
+          answers: ["81", "72", "90", "99"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 3/4 + 1/4?",
+          answers: ["1", "1/2", "3/4", "1/4"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 5 x 0?",
+          answers: ["0", "5", "1", "Tidak terdefinisi"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 12 + 15 - 7?",
+          answers: ["20", "25", "30", "35"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 8 x 7?",
+          answers: ["54", "56", "58", "60"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 100 - 45?",
+          answers: ["55", "50", "60", "65"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 6 x 6?",
+          answers: ["36", "30", "42", "48"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 81 ÷ 9?",
+          answers: ["8", "9", "7", "6"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 14 + 6?",
+          answers: ["18", "20", "22", "16"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 5 pangkat 3?",
+          answers: ["125", "15", "25", "75"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 20 ÷ 5?",
+          answers: ["2", "3", "4", "5"],
+          correct: 2,
+        },
+        {
+          question: "Berapakah hasil dari 7 + 8 x 2?",
+          answers: ["30", "23", "22", "15"],
+          correct: 1,
+        },
+        {
+          question: "Berapakah hasil dari 9 - 3 + 2?",
+          answers: ["6", "8", "7", "5"],
+          correct: 2,
+        },
+        {
+          question: "Berapakah hasil dari 4 x 4?",
+          answers: ["16", "12", "20", "14"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 10 + 10?",
+          answers: ["20", "15", "25", "30"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 18 ÷ 3?",
+          answers: ["6", "5", "7", "4"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 11 + 9?",
+          answers: ["20", "19", "21", "18"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 3 pangkat 4?",
+          answers: ["81", "64", "27", "54"],
+          correct: 2,
+        },
+        {
+          question: "Berapakah hasil dari 25 - 10?",
+          answers: ["15", "20", "10", "5"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 7 x 5?",
+          answers: ["35", "30", "40", "25"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 16 ÷ 4?",
+          answers: ["4", "5", "3", "6"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 13 + 7?",
+          answers: ["20", "19", "21", "18"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 2 x 9?",
+          answers: ["18", "16", "20", "22"],
+          correct: 0,
+        },
+        {
+          question: "Berapakah hasil dari 8 + 12?",
+          answers: ["20", "18", "22", "24"],
+          correct: 0,
+        },
+      ],
+    },
+    programmer: {
+      title: "Quiz Programmer",
+      description: "Uji pengetahuanmu tentang pemrograman dan teknologi.",
+      avatar:
+        "https://placehold.co/80x80/png?text=Programmer+Avatar",
+      quote:
+        '"Code is like humor. When you have to explain it, it’s bad." – Cory House',
+      questions: [
+        {
+          question: "Apa bahasa pemrograman yang paling populer untuk pengembangan web?",
+          answers: ["JavaScript", "Python", "Java", "C++"],
+          correct: 0,
+        },
+        {
+          question: "Apa itu HTML?",
+          answers: [
+            "Bahasa markup untuk membuat halaman web",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa singkatan dari CSS?",
+          answers: [
+            "Cascading Style Sheets",
+            "Computer Style Sheets",
+            "Creative Style System",
+            "Colorful Style Sheets",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu Git?",
+          answers: [
+            "Sistem kontrol versi",
+            "Bahasa pemrograman",
+            "Database",
+            "Editor teks",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu API?",
+          answers: [
+            "Antarmuka pemrograman aplikasi",
+            "Bahasa pemrograman",
+            "Sistem operasi",
+            "Database",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu loop dalam pemrograman?",
+          answers: [
+            "Perulangan kode",
+            "Kondisi if",
+            "Fungsi",
+            "Variabel",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu variabel dalam pemrograman?",
+          answers: [
+            "Tempat menyimpan data",
+            "Fungsi",
+            "Perulangan",
+            "Kondisi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu fungsi dalam pemrograman?",
+          answers: [
+            "Blok kode yang dapat dipanggil",
+            "Variabel",
+            "Perulangan",
+            "Kondisi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu debugging?",
+          answers: [
+            "Proses mencari dan memperbaiki kesalahan kode",
+            "Menulis kode baru",
+            "Menghapus kode",
+            "Membuat desain UI",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu bahasa pemrograman Python?",
+          answers: [
+            "Bahasa pemrograman tingkat tinggi yang mudah dipelajari",
+            "Bahasa markup",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu IDE?",
+          answers: [
+            "Lingkungan pengembangan terintegrasi",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu JavaScript?",
+          answers: [
+            "Bahasa pemrograman untuk web interaktif",
+            "Bahasa markup",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu framework dalam pemrograman?",
+          answers: [
+            "Kerangka kerja untuk membangun aplikasi",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu SQL?",
+          answers: [
+            "Bahasa untuk mengelola database",
+            "Bahasa pemrograman",
+            "Bahasa markup",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu HTML5?",
+          answers: [
+            "Versi terbaru HTML dengan fitur tambahan",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu CSS3?",
+          answers: [
+            "Versi terbaru CSS dengan fitur tambahan",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu responsive design?",
+          answers: [
+            "Desain web yang menyesuaikan dengan ukuran layar",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu GitHub?",
+          answers: [
+            "Platform hosting kode dan kolaborasi",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu Node.js?",
+          answers: [
+            "Platform untuk menjalankan JavaScript di server",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu JSON?",
+          answers: [
+            "Format data untuk pertukaran informasi",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu API REST?",
+          answers: [
+            "Arsitektur untuk layanan web",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu CSS Grid?",
+          answers: [
+            "Sistem layout dua dimensi di CSS",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu Flexbox?",
+          answers: [
+            "Sistem layout satu dimensi di CSS",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu closure dalam JavaScript?",
+          answers: [
+            "Fungsi yang mengakses variabel dari scope luar",
+            "Variabel global",
+            "Fungsi anonim",
+            "Objek",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu hoisting dalam JavaScript?",
+          answers: [
+            "Pengangkatan deklarasi variabel dan fungsi ke atas scope",
+            "Penghapusan variabel",
+            "Penulisan kode",
+            "Pemanggilan fungsi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu asynchronous programming?",
+          answers: [
+            "Pemrograman yang tidak menunggu proses selesai",
+            "Pemrograman sinkron",
+            "Pemrograman paralel",
+            "Pemrograman berurutan",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu event loop dalam JavaScript?",
+          answers: [
+            "Mekanisme untuk menangani operasi asynchronous",
+            "Fungsi callback",
+            "Variabel global",
+            "Objek",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu REST API?",
+          answers: [
+            "API yang menggunakan prinsip REST",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu MVC dalam pemrograman?",
+          answers: [
+            "Model-View-Controller, pola desain perangkat lunak",
+            "Bahasa pemrograman",
+            "Database",
+            "Sistem operasi",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Apa itu recursion?",
+          answers: [
+            "Fungsi yang memanggil dirinya sendiri",
+            "Variabel global",
+            "Fungsi anonim",
+            "Objek",
+          ],
+          correct: 0,
+        },
+      ],
+    },
+  };
+
+  // Quotes for each quiz theme
+  const quotes = {
+    sejarah: '"Sejarah adalah guru kehidupan." – Cicero',
+    islami: '"Ilmu tanpa amal adalah kesia-siaan." – Hadis',
+    kristen: '"Kasih adalah hukum yang terutama." – Alkitab',
+    matematika: '"Matematika adalah bahasa alam semesta." – Galileo Galilei',
+    programmer: '"Code is like humor. When you have to explain it, it’s bad." – Cory House',
+  };
+
+  // State variables
+  let currentPage = "home";
+  let currentQuiz = null;
+  let currentQuestionIndex = 0;
+  let userAnswers = [];
+  let userName = "";
+  let leaderboard = JSON.parse(localStorage.getItem("kuisLeaderboard")) || [];
+
+  // Audio element
+  const audio = document.getElementById("backgroundAudio");
+
+  // DOM elements
+  const loadingScreen = document.getElementById("loadingScreen");
+  const app = document.getElementById("app");
+  const navButtons = document.querySelectorAll(".nav-btn");
+  const pages = document.querySelectorAll(".page-section");
+  const pageHome = document.getElementById("page-home");
+  const pageQuiz = document.getElementById("page-quiz");
+  const pageLeaderboard = document.getElementById("page-leaderboard");
+  const quizAvatar = document.getElementById("quizAvatar");
+  const quizTitle = document.getElementById("quizTitle");
+  const quizDescription = document.getElementById("quizDescription");
+  const quoteContainer = document.getElementById("quoteContainer");
+  const questionContainer = document.getElementById("questionContainer");
+  const answersContainer = document.getElementById("answersContainer");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const startQuizBtn = document.getElementById("startQuizBtn");
+  const leaderboardBody = document.getElementById("leaderboardBody");
+
+  // Show loading screen for 3.5 seconds then show app
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      loadingScreen.classList.add("hidden");
+      app.classList.remove("hidden");
+      audio.volume = 0.15;
+      audio.play().catch(() => {});
+      showPage("home");
+    }, 3500);
+  });
+
+  // Navigation button click handler
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const page = btn.getAttribute("data-page");
+      if (page === "home") {
+        showPage("home");
+      } else if (page === "leaderboard") {
+        showPage("leaderboard");
+        renderLeaderboard();
+      } else {
+        // Quiz pages
+        if (quizzes[page]) {
+          currentQuiz = quizzes[page];
+          currentQuestionIndex = 0;
+          userAnswers = new Array(currentQuiz.questions.length).fill(null);
+          showQuizPage(currentQuiz);
+        }
+      }
+      updateNavButtons(page);
+    });
+  });
+
+  // Update nav buttons style
+  function updateNavButtons(activePage) {
+    navButtons.forEach((btn) => {
+      if (btn.getAttribute("data-page") === activePage) {
+        btn.classList.add("bg-indigo-600", "text-white");
+        btn.classList.remove("bg-indigo-100", "text-indigo-700");
+      } else {
+        btn.classList.remove("bg-indigo-600", "text-white");
+        btn.classList.add("bg-indigo-100", "text-indigo-700");
+      }
+    });
+  }
+
+  // Show page by id
+  function showPage(pageId) {
+    currentPage = pageId;
+    pages.forEach((page) => {
+      if (page.id === "page-" + pageId) {
+        page.classList.remove("hidden");
+      } else {
+        page.classList.add("hidden");
+      }
+    });
+    // Hide quiz page if not quiz
+    if (pageId !== "sejarah" && pageId !== "islami" && pageId !== "kristen" && pageId !== "matematika" && pageId !== "programmer") {
+      pageQuiz.classList.add("hidden");
+    }
+  }
+
+  // Show quiz page with data
+  function showQuizPage(quiz) {
+    showPage("quiz");
+    pageQuiz.classList.remove("hidden");
+    quizAvatar.src = quiz.avatar;
+    quizAvatar.alt = `Avatar ilustrasi tema quiz ${quiz.title}`;
+    quizTitle.textContent = quiz.title;
+    quizDescription.textContent = quiz.description;
+    quoteContainer.textContent = quiz.quote || quotes[quiz.title.toLowerCase()] || "";
+    startQuizBtn.classList.remove("hidden");
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    questionContainer.textContent = "";
+    answersContainer.innerHTML = "";
+  }
+
+  // Render question and answers
+  function renderQuestion() {
+    const questionObj = currentQuiz.questions[currentQuestionIndex];
+    questionContainer.textContent = `Soal ${currentQuestionIndex + 1}: ${questionObj.question}`;
+    answersContainer.innerHTML = "";
+    questionObj.answers.forEach((answer, i) => {
+      const btn = document.createElement("button");
+      btn.className =
+        "answer-btn bg-indigo-100 hover:bg-indigo-200 rounded-md px-4 py-2 text-indigo-900 font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-500";
+      btn.textContent = answer;
+      btn.setAttribute("data-index", i);
+      if (userAnswers[currentQuestionIndex] === i) {
+        btn.classList.add("bg-indigo-600", "text-white");
+      }
+      btn.addEventListener("click", () => {
+        userAnswers[currentQuestionIndex] = i;
+        updateAnswerButtons();
+        nextBtn.disabled = false;
+      });
+      answersContainer.appendChild(btn);
+    });
+    prevBtn.disabled = currentQuestionIndex === 0;
+    nextBtn.disabled = userAnswers[currentQuestionIndex] === null;
+  }
+
+  // Update answer buttons style after selection
+  function updateAnswerButtons() {
+    const buttons = answersContainer.querySelectorAll("button.answer-btn");
+    buttons.forEach((btn) => {
+      const idx = parseInt(btn.getAttribute("data-index"));
+      if (userAnswers[currentQuestionIndex] === idx) {
+        btn.classList.add("bg-indigo-600", "text-white");
+      } else {
+        btn.classList.remove("bg-indigo-600", "text-white");
+      }
+    });
+  }
+
+  // Start quiz button click
+  startQuizBtn.addEventListener("click", () => {
+    userName = prompt("Masukkan nama kamu untuk leaderboard:", "Anonim");
+    if (!userName || userName.trim() === "") {
+      userName = "Anonim";
+    }
+    startQuizBtn.classList.add("hidden");
+    currentQuestionIndex = 0;
+    renderQuestion();
+  });
+
+  // Prev button click
+  prevBtn.addEventListener("click", () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      renderQuestion();
+    }
+  });
+
+  // Next button click
+  nextBtn.addEventListener("click", () => {
+    if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+      currentQuestionIndex++;
+      renderQuestion();
+    } else {
+      // Quiz selesai, hitung nilai dan simpan ke leaderboard
+      const score = calculateScore();
+      alert(`Quiz selesai! Nilai kamu: ${score} / ${currentQuiz.questions.length}`);
+      saveScore(userName, currentQuiz.title, score);
+      showPage("leaderboard");
+      renderLeaderboard();
+      updateNavButtons("leaderboard");
+    }
+  });
+
+  // Calculate score
+  function calculateScore() {
+    let score = 0;
+    currentQuiz.questions.forEach((q, i) => {
+      if (userAnswers[i] === q.correct) {
+        score++;
+      }
+    });
+    return score;
+  }
+
+  // Save score to leaderboard (localStorage)
+  function saveScore(name, quizTitle, score) {
+    const date = new Date().toLocaleString("id-ID", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    leaderboard.push({ name, quizTitle, score, date });
+    // Sort descending by score
+    leaderboard.sort((a, b) => b.score - a.score);
+    // Keep top 50 scores only
+    if (leaderboard.length > 50) leaderboard.length = 50;
+    localStorage.setItem("kuisLeaderboard", JSON.stringify(leaderboard));
+  }
+
+  // Render leaderboard table
+  function renderLeaderboard() {
+    leaderboardBody.innerHTML = "";
+    if (leaderboard.length === 0) {
+      leaderboardBody.innerHTML =
+        '<tr><td colspan="5" class="text-center py-6 text-gray-500 italic">Belum ada data leaderboard.</td></tr>';
+      return;
+    }
+    leaderboard.forEach((entry, i) => {
+      const tr = document.createElement("tr");
+      tr.className = i % 2 === 0 ? "bg-indigo-50" : "";
+      tr.innerHTML = `
+        <td class="py-3 px-4 border-b border-indigo-300 font-semibold">${i + 1}</td>
+        <td class="py-3 px-4 border-b border-indigo-300">${escapeHtml(entry.name)}</td>
+        <td class="py-3 px-4 border-b border-indigo-300">${escapeHtml(entry.quizTitle)}</td>
+        <td class="py-3 px-4 border-b border-indigo-300 font-semibold">${entry.score}</td>
+        <td class="py-3 px-4 border-b border-indigo-300">${escapeHtml(entry.date)}</td>
+      `;
+      leaderboardBody.appendChild(tr);
+    });
+  }
+
+  // Escape HTML to prevent injection
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function (m) {
+      return (
+        {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        }[m] || m
+      );
+    });
+  }
+  </script>
+  <style>
+   @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+  </style>
+ </body>
+</html>
